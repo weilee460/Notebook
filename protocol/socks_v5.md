@@ -72,7 +72,24 @@
 ```
 
 * 此处ver同上，值为5；
-* 
+* REP(reply field):
+	* 0x00  succeeded
+	* 0x01  general SOCKS server failure
+	* 0x02  connection not allowed by ruleset
+	* 0x03  network unreachable
+	* 0x04  host unreachable
+	* 0x05  connection refused
+	* 0x06  TTL expired
+	* 0x07  command not supported
+	* 0x08 address type not supported
+	* 0x09 to 0xFF unassigned
+* RSV 保留
+* ATYP (address type of following address):
+   * 0x01  IPv4 address
+   * 0x03  domainname
+   * 0x04  IPv6
+* BND.ADDR server bound address
+* BND.PORT server bound port in network octet order 
 
 ## 报文截取
 
