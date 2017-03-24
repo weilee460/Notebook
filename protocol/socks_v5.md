@@ -97,9 +97,10 @@
 使用wireshark截取lo网卡的包即可。
 
 ### Windows
-安装wireshark后，不能截取环回链路的网络报文，需要将winpcap卸载掉，安装npcap。  
-**注意：** 未尝试过。
+安装wireshark后，不能截取环回链路的网络报文。原因是winpcap不支持环回链路的报文截取，需要将winpcap卸载掉，安装npcap。参考npcap官网。   
+**注意：** 作者未尝试过。
 
 ## 参考
 1. [RFC1928](https://www.ietf.org/rfc/rfc1928.txt)
 2. [科学上网之socks5代理原理](http://www.aichengxu.com/wangluo/9370686.htm)
+3. [Npcap](https://nmap.org/npcap/)  
