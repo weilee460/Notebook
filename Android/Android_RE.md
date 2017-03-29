@@ -1,7 +1,30 @@
 # Android逆向
 
 ##APK文件
+将apk文件的后缀名由“apk”改为"rar"，使用解压软件打开。目录如下：
 
+```
+---assets
+---com
+---lib
+---META-INF
+---res
+---AndroidManifest.xml
+---classes.dex
+---resources.arsc
+```
+说明：
+  
+* assets目录存放一些配置文件等。
+* lib目录存放了一些公用的库，含有以CPU架构命名的子目录。
+* res目录存放资源文件，例如图片，视频等。
+* META-INF目录下存放的是签名信息。
+* classes.dex是java编译后生成的java字节码文件。
+* resources.arsc是编译后的二进制资源文件。
+* AndroidManifest.xml是应用的描述文件，含有应用名、版本等信息。apk中的文件是压缩过的，可以使用AXMLPrinter2工具解开。命令：
+```
+java -jar AXMLPrinter2.jar AndroidManifest.xml
+```
 
 ##反编译
 反编译：
