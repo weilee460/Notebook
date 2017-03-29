@@ -44,13 +44,13 @@ java -jar apktool_2.2.2.jar b xxx
 
 ###生成keystore
 ```
-keytool -genkey -v keystore mykeystore -alias mingming -keyalg RSA -validity 20000
+keytool -genkey -v keystore mykeystore(改为自己想要的名字) -alias mingming(任意名，后续的签名要用) -keyalg RSA -validity 20000
 ```
 然后根据提示输入密码等。
 
 ###签名apk
 ```
-jarsigner -verbose -keystore mykeystore -signedjar xxx_signed.apk xxx.apk mingming
+jarsigner -verbose -keystore mykeystore -signedjar xxx_signed.apk(签名后生成的apk名字) xxx.apk mingming(生成keystore时的别名)
 ```
 
 
@@ -59,4 +59,5 @@ jarsigner -verbose -keystore mykeystore -signedjar xxx_signed.apk xxx.apk mingmi
 ##参考
 1. [apktool下载](https://bitbucket.org/iBotPeaches/apktool/downloads/)  
 2. [apktool](https://ibotpeaches.github.io/Apktool/)
+3. [oracle jar signing](http://docs.oracle.com/javase/tutorial/deployment/jar/signing.html)
 
