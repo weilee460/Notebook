@@ -60,12 +60,38 @@ Dalvik字节码有两种类型：原始类型，引用类型。
 
 ### 寄存器
 Dalvik的字节码中，寄存器都是32位，能够支持任何类型；64位类型用寄存器表示。有两种方式指定一个方法中有多少几个寄存器是可用的：.registers指令指定了方法中寄存器的总数；.locals指令表示方法中的非参数寄存器的数量。
+Smali中所有的操作必须经过寄存器来进行：本地寄存器用v开头数字结尾的符号表示，例如v0、v1等；参数寄存器用p开头数字结尾的符号表示，如p0、p1等。注意，p0不一定是第一个参数，在非static函数中，p0代表"this"，p1表示函数的第一个参数，p2表示函数的第二个参数...，在static函数中p0是第一个参数，原因是java中的static方法中没有this参数。
+
+###成员变量
+定义：
+```
+.field public/private [static] [final] varName:<类型>
+```
+成员变量有不同的指令，有获取指令和操作指令。获取指令有：iget、sget、iget-boolean、iget-object、sget-object等。操作指令有：iput、sput、iput-boolean、sput-boolean、iput-object、sput-object等。上述指令中，不带"-object"的表示操作的成员变量是基本的数据类型；带"-object"表示操作的成员变量是对象类型；特别，boolean类型使用的是带"-boolean"的指令操作
+
+###变量操作
+例子1：
+```
+const/4 v0, 0x1
+iput-boolean v0,p0,Lcom/aaa;->IsRegistered:Z
+```
+首先将值0x1存放到v0中
+使用iput-boolean指令将v0的值存放到com.aaa.IsRegistered这个变量中。
+等价于(p0表示this)：
+```
+this.IsRegistered = true
+```
+
+例子2:  
+```
+sget-object vo,Lcom/aaa;->ID:Ljava/lang/String;
+```  
+意思是：获取类型为String的com.aaa.ID的值，并保存到本地寄存器v0中。
+
 
 ### 方法传参
 * 当一个方法被调用的时候，方法的参数被置于最后N个寄存器中。若方法有两个参数，5个寄存器(v0-v4)，那么参数将置于最后的2个参数，即v3,v4中。  
 * 非静态方法中的第一个参数总是调用该方法的对象。例如：非静态方法LMyobject;->callMe(II)有两个整型参数，此外还有一个隐含的LMyobject;的参数
-
-
 
 ## 基本程序结构
 ### 条件判断
