@@ -62,14 +62,14 @@ Dalvik字节码有两种类型：原始类型，引用类型。
 Dalvik的字节码中，寄存器都是32位，能够支持任何类型；64位类型用寄存器表示。有两种方式指定一个方法中有多少几个寄存器是可用的：.registers指令指定了方法中寄存器的总数；.locals指令表示方法中的非参数寄存器的数量。
 Smali中所有的操作必须经过寄存器来进行：本地寄存器用v开头数字结尾的符号表示，例如v0、v1等；参数寄存器用p开头数字结尾的符号表示，如p0、p1等。注意，p0不一定是第一个参数，在非static函数中，p0代表"this"，p1表示函数的第一个参数，p2表示函数的第二个参数...，在static函数中p0是第一个参数，原因是java中的static方法中没有this参数。
 
-###成员变量
+### 成员变量
 定义：
 ```
 .field public/private [static] [final] varName:<类型>
 ```
 成员变量有不同的指令，有获取指令和操作指令。获取指令有：iget、sget、iget-boolean、iget-object、sget-object等。操作指令有：iput、sput、iput-boolean、sput-boolean、iput-object、sput-object等。上述指令中，不带"-object"的表示操作的成员变量是基本的数据类型；带"-object"表示操作的成员变量是对象类型；特别，boolean类型使用的是带"-boolean"的指令操作
 
-###变量操作
+### 变量操作
 例子1：
 ```
 const/4 v0, 0x1
@@ -122,4 +122,4 @@ sget-object vo,Lcom/aaa;->ID:Ljava/lang/String;
 ## 参考
 1.[吾爱破解安卓逆向入门教程（二）---初识APK、Dalvik字节码以及Smali](http://www.52pojie.cn/forum.php?mod=viewthread&tid=395689)  
 2.[smali](https://github.com/JesusFreke/smali)  
-3. [关于SMALI语法](http://bbs.pediy.com/thread-151769.htm)
+3. [关于SMALI语法](http://bbs.pediy.com/thread-151769.htm) 
