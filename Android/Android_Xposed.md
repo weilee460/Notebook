@@ -1,6 +1,17 @@
 # Xposed develop
 
-##Xposed
+##Xposed原理
+Android设备启动部分过程：有一个进程叫做“Zygote”，这个进程是Android运行时的核心。每一个应用都是fork它启动的。这个进程由/init.rc脚本，在手机启动时启动起来的。这个进程执行完成以后，启动/system/bin/app_process，这个进程加载所需的类，触发初始化方法。  
+Xposed就是将上述的/system/bin/app_process替换掉，使用"extended app_process"，这个"extended app_process"添加了额外的jar到classpath中，从特定的路径调用方法。
+
+官方描述如下：
+>Before beginning with your modification, you should get a rough idea how Xposed works (you might skip this section though if you feel too bored). Here is how:
+
+>There is a process that is called "Zygote". This is the heart of the Android runtime. Every application is started as a copy ("fork") of it. This process is started by an /init.rc script when the phone is booted. The process start is done with /system/bin/app_process, which loads the needed classes and invokes the initialization methods.
+
+> This is where Xposed comes into play. When you install the framework, an extended app_process executable is copied to /system/bin. This extended startup process adds an additional jar to the classpath and calls methods from there at certain places. For instance, just after the VM has been created, even before the main method of Zygote has been called. And inside that method, we are part of Zygote and can act in its context.
+
+> The jar is located at /data/data/de.robv.android.xposed.installer/bin/XposedBridge.jar and its source code can be found here. Looking at the class XposedBridge, you can see the main method. This is what I wrote about above, this gets called in the very beginning of the process. Some initializations are done there and also the modules are loaded (I will come back to module loading later).
 
 
 ##Xposed模块开发
@@ -25,7 +36,7 @@ dependencies {
 }
 ```
 
-其中  
+其中 
 ```
 provided 'de.robv.android.xposed:api:82:sources'
 ```
@@ -64,7 +75,7 @@ provided 'de.robv.android.xposed:api:82:sources'
 
  
 ###模块实现
-在src/main/java/包名，新建一个类，假设类名是“Main”，例如：
+在src/main/java/包名，新建一个类，假设类名是“Main”，需要hook方法是是"checkLogin(String str)", 则实现如下：
 
 ```
 package com.feng.lee.hookdemo;
@@ -129,3 +140,4 @@ com.feng.lee.hookdemo.Main
 2. [Development tutorial](https://github.com/rovo89/XposedBridge/wiki/Development-tutorial)
 3. [Using the Xposed Framework API](https://github.com/rovo89/XposedBridge/wiki/Using-the-Xposed-Framework-API)
 4. [Xposed API](https://bintray.com/rovo89/de.robv.android.xposed/api)
+5. [Development tutorial](https://github.com/rovo89/XposedBridge/wiki/Development-tutorial)

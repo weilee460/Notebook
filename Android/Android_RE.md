@@ -1,6 +1,6 @@
 # Android逆向
 
-##APK文件
+##APK文件结构
 将apk文件的后缀名由“apk”改为"rar"，使用解压软件打开。目录如下：
 
 ```
@@ -75,8 +75,6 @@ keytool -genkey -v keystore mykeystore(改为自己想要的名字) -alias mingm
 ```
 jarsigner -verbose -keystore mykeystore -signedjar xxx_signed.apk(签名后生成的apk名字) xxx.apk mingming(生成keystore时的别名)
 ```
-
-
 
 
 ##参考
