@@ -1,6 +1,6 @@
 # Xposed develop
 
-##Xposed原理
+## Xposed原理
 Android设备启动部分过程：有一个进程叫做“Zygote”，这个进程是Android运行时的核心。每一个应用都是fork它启动的。这个进程由/init.rc脚本，在手机启动时启动起来的。这个进程执行完成以后，启动/system/bin/app_process，这个进程加载所需的类，触发初始化方法。  
 Xposed就是将上述的/system/bin/app_process替换掉，使用"extended app_process"，这个"extended app_process"添加了额外的jar到classpath中，从特定的路径调用方法。
 
@@ -14,15 +14,15 @@ Xposed就是将上述的/system/bin/app_process替换掉，使用"extended app_p
 > The jar is located at /data/data/de.robv.android.xposed.installer/bin/XposedBridge.jar and its source code can be found here. Looking at the class XposedBridge, you can see the main method. This is what I wrote about above, this gets called in the very beginning of the process. Some initializations are done there and also the modules are loaded (I will come back to module loading later).
 
 
-##Xposed模块开发
+## Xposed模块开发
 使用Android Studio建立一个空Activity的Android App项目。下载Xposed API。  
 API 下载：[Xposed API](https://bintray.com/rovo89/de.robv.android.xposed/api)
 链接中有两个下载，分别是：api-82.jar和api-82-sources.jar，其中api-82.jar就是模块用的api，api-82-sources.jar包含有文档，如果不用看，可以不用下载下来。
 
-###加入API库
+### 加入API库
 在app目录下建立lib文件夹，加入下载得到的api-82.jar。
 
-###引入Xposed API
+### 引入Xposed API
 在上面建立的项目中：app/build.gradle文件中增加：
 
 ```
@@ -42,7 +42,8 @@ provided 'de.robv.android.xposed:api:82:sources'
 ```
 包含了文档，若不用，可以不用添加。
 
-###声明Xposed模块
+### 声明Xposed模块
+
 在项目的AndroidManifest.xml文件中添加如下代码： 
  
 ```
@@ -74,7 +75,8 @@ provided 'de.robv.android.xposed:api:82:sources'
 2.`<meta-data android:name="xposedminversion" android:value="53" />`表明支持的最低版本。
 
  
-###模块实现
+### 模块实现
+
 在src/main/java/包名，新建一个类，假设类名是“Main”，需要hook方法是是"checkLogin(String str)", 则实现如下：
 
 ```
@@ -117,7 +119,7 @@ public class Main implements IXposedHookLoadPackage {
         }
 ```
 
-###声明模块入口
+### 声明模块入口
 在app/main/src/main下，新建assets目录，在目录内新建xposed_init文件。
 在文件中添加如下代码：
 
@@ -128,14 +130,14 @@ com.feng.lee.hookdemo.Main
 说明：
 `com.feng.lee.hookdemo.Main`中Main是类名，前面是包名。
 
-###编译安装
+### 编译安装
 不用直接使用Android Studio中的run，是不能直接运行的。使用build中的"Generate Signed APK"选项编译出一个签名的apk文件，然后安装到手机上。安装好以后，打开Xposed中的模块，勾选上这个模块，重启手机，即可生效。
 
 
 
 
 
-##参考
+## 参考
 1. [Xposed模块的开发](http://www.snowdream.tech/2016/09/02/android-develop-xposed-module/)
 2. [Development tutorial](https://github.com/rovo89/XposedBridge/wiki/Development-tutorial)
 3. [Using the Xposed Framework API](https://github.com/rovo89/XposedBridge/wiki/Using-the-Xposed-Framework-API)
