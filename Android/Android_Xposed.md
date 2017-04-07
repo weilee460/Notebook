@@ -131,10 +131,7 @@ com.feng.lee.hookdemo.Main
 `com.feng.lee.hookdemo.Main`中Main是类名，前面是包名。
 
 ### 编译安装
-不用直接使用Android Studio中的run，是不能直接运行的。使用build中的"Generate Signed APK"选项编译出一个签名的apk文件，然后安装到手机上。安装好以后，打开Xposed中的模块，勾选上这个模块，重启手机，即可生效。
-
-
-
+不要直接使用Android Studio中的run，是不能直接运行的。使用build中的"Generate Signed APK"选项编译出一个签名的apk文件，然后安装到手机上。安装好以后，打开Xposed中的模块，勾选上这个模块，重启手机，即可生效。在Xposed的日志中即可查看到输出的信息。
 
 
 ## 参考
