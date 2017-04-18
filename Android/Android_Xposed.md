@@ -133,6 +133,43 @@ com.feng.lee.hookdemo.Main
 ### 编译安装
 不要直接使用Android Studio中的run，是不能直接运行的。使用build中的"Generate Signed APK"选项编译出一个签名的apk文件，然后安装到手机上。安装好以后，打开Xposed中的模块，勾选上这个模块，重启手机，即可生效。在Xposed的日志中即可查看到输出的信息。
 
+## Hook Method Return Value
+Xposed支持方法返回值的hook，实现如下：
+假设hook的方法名是：“get_username”，没有参数。类名是“com.feng.lee.testhookdemo.UserInfo”
+
+```
+XposedHelpers.findAndHookMethod("com.feng.lee.testhookdemo.UserInfo", loadPackageParam.classLoader,
+                        "get_username", new XC_MethodHook() {
+                            @Override
+                            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                                //super.afterHookedMethod(param);
+                                String usename_str = (String) param.getResult();
+                                XposedBridge.log("username_private = " + usename_str);
+                            }
+                        });
+```
+即可在Xposed日志中显示用户名。
+
+## Hook Class Static field
+Xposed支持class的static类型field的hook，实现如下：
+假设类名是“com.feng.lee.testhookdemo.UserInfo”，静态变量是“username_static”
+
+```
+Class clazz = XposedHelpers.findClass("com.feng.lee.testhookdemo.UserInfo",
+                        loadPackageParam.classLoader);
+XposedHelpers.findAndHookConstructor(clazz, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        //super.afterHookedMethod(param);
+                        XposedHelpers.setStaticObjectField(clazz, "username_static", "lee1");
+                        Field username_static = clazz.getDeclaredField("username_static");
+                        username_static.setAccessible(true);
+                        XposedBridge.log("username_static = " + username_static.get(null).toString());
+                    }
+                });
+```
+
+**注意：**Xposed不支持Hook Class的普通属性，根据官方解释，Xposed利用了java的反射机制，反射只能得到class，不能得到object。
 
 ## 参考
 1. [Xposed模块的开发](http://www.snowdream.tech/2016/09/02/android-develop-xposed-module/)
