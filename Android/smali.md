@@ -67,9 +67,19 @@ Smali中所有的操作必须经过寄存器来进行：本地寄存器用v开�
 ```
 .field public/private [static] [final] varName:<类型>
 ```
-成员变量有不同的指令，有获取指令和操作指令。获取指令有：iget、sget、iget-boolean、iget-object、sget-object等。操作指令有：iput、sput、iput-boolean、sput-boolean、iput-object、sput-object等。上述指令中，不带"-object"的表示操作的成员变量是基本的数据类型；带"-object"表示操作的成员变量是对象类型；特别，boolean类型使用的是带"-boolean"的指令操作
 
-### 变量操作
+### 寄存器操作指令
+不同的成员变量有不同的指令。这些指令分为两类：获取指令，操作指令。
+
+获取指令有：iget、sget、iget-boolean、iget-object、sget-object等。
+
+操作指令有：iput、sput、iput-boolean、sput-boolean、iput-object、sput-object等。
+
+上述指令中，不带"-object"的表示操作的成员变量是基本的数据类型；带"-object"表示操作的成员变量是对象类型；特别，boolean类型使用的是带"-boolean"的指令操作
+
+### 寄存器操作
+**get指令**
+
 例子1：
 ```
 const/4 v0, 0x1
@@ -87,6 +97,34 @@ this.IsRegistered = true
 sget-object vo,Lcom/aaa;->ID:Ljava/lang/String;
 ```  
 意思是：获取类型为String的com.aaa.ID的值，并保存到本地寄存器v0中。
+
+例子3:  
+```
+iget-object v0,p0,Lcom/aaa;->view:Lcom/aaa/view;
+```
+即：将类型为com.aaa.view的com.aaa.view的值保存到本地寄存器v0中，此处的p0即“this”参数。
+
+**注意:** 获取array的值，使用aget和aget-object。
+
+*****************
+**put指令**
+
+例子4:  
+
+```
+const/4 v3, 0x0
+sput-object v3,Lcom/aaa;->timer:Lcom/aaa/timer;
+```
+即：```this.timer = null;```
+
+例子5:
+
+```
+.local v0,args:Landroid/os/Message;
+const/4 v1,0x12
+iput v1,v0,Landroid/os/Message;->what:I
+```
+即```args.what = 18;```其中args的类型是android.os.Message
 
 
 ### 方法传参
@@ -115,6 +153,8 @@ sget-object vo,Lcom/aaa;->ID:Ljava/lang/String;
 * .class public Lcom/aaaa;    //com.aaaa这个package下的一个类  
 * .super Lcom/bbbb;   //这个类继承自com.bbbb这个类
 * .source "cccc.java"  //这个smali文件由cccc.java源文件编译得到
+
+## 
 
 
 
