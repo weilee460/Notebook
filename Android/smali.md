@@ -81,13 +81,15 @@ Smali中所有的操作必须经过寄存器来进行：本地寄存器用v开�
 **get指令**
 
 例子1：
+
 ```
 const/4 v0, 0x1
 iput-boolean v0,p0,Lcom/aaa;->IsRegistered:Z
 ```
-首先将值0x1存放到v0中
+首先将值0x1存放到v0中。
 使用iput-boolean指令将v0的值存放到com.aaa.IsRegistered这个变量中。
 等价于(p0表示this)：
+
 ```
 this.IsRegistered = true
 ```
@@ -98,7 +100,8 @@ sget-object vo,Lcom/aaa;->ID:Ljava/lang/String;
 ```  
 意思是：获取类型为String的com.aaa.ID的值，并保存到本地寄存器v0中。
 
-例子3:  
+例子3: 
+ 
 ```
 iget-object v0,p0,Lcom/aaa;->view:Lcom/aaa/view;
 ```
@@ -149,6 +152,12 @@ iput v1,v0,Landroid/os/Message;->what:I
 
 ## 函数调用
 
+函数调用指令：
+
+* invoke-super 调用父类函数
+* invoke-direct 调用函数
+* invoke-static 调用静态函数
+
 ## Smali包信息
 * .class public Lcom/aaaa;    //com.aaaa这个package下的一个类  
 * .super Lcom/bbbb;   //这个类继承自com.bbbb这个类
@@ -162,4 +171,5 @@ iput v1,v0,Landroid/os/Message;->what:I
 ## 参考
 1.[吾爱破解安卓逆向入门教程（二）---初识APK、Dalvik字节码以及Smali](http://www.52pojie.cn/forum.php?mod=viewthread&tid=395689)  
 2.[smali](https://github.com/JesusFreke/smali)  
-3. [关于SMALI语法](http://bbs.pediy.com/thread-151769.htm) 
+3. [关于SMALI语法](http://bbs.pediy.com/thread-151769.htm)  
+4. [吾爱破解安卓逆向入门教程（三）---深入Smali文件 ](http://www.52pojie.cn/thread-396966-1-1.html) 
