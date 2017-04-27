@@ -20,7 +20,7 @@ Dalvik字节码有两种类型：原始类型，引用类型。
 1. 对象以Lpackage/name/ObjectName; 的形式表示，前面的"L"表示这是一个对象类型，package/name/是该对象所在的包，ObjectName是对象的名字，";"表示对象名称结束。相当于java中的package.name.ObjectName。例如：Ljava/lang/String;相当于java/lang.String；  
 2. [I -- 表示一个整型的一维数组，相当于java的"int[]"；  
 3. [[I -- 相当于"int[][]"，类似的"[[[I"相当于"int[][][]"；  
-4. [Ljava/lang/String; -- 表示一个String对象数组。
+4. [Ljava/lang/String; -- 表示一个String对象数组，对象的表示都是以L开头。
 
  
 ***
@@ -39,6 +39,49 @@ Dalvik字节码有两种类型：原始类型，引用类型。
 2. 方法的参数是一个接一个，中间没有隔开，没有空格。  
 
 ***
+
+### 方法调用
+
+smali中的方法有两类：direct和virtual。direct method就是private method，public和protect都属于virtual method。调用时，分别使用invoke-direct和invoke-virtual。调用函数的还有invoke-static，invoke-super，invoke-interface等指令。
+
+* invoke-static：调用static方法。
+  
+  例如：
+  
+  ```
+  invoke-static {},Lcom/aaa;->CheckSignature()Z
+  ```
+  其中的{}，是调用函数的实例和参数列表，由于此函数没有参数，故为空。
+  
+  例如：
+  
+  ```
+  const-string v0,"NDKLIB"
+  invoke-static {v0},Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
+  ```
+  v0就是参数"NDKLIB"，即 ```loadLibrary("NDKLIB")```
+  
+* invoke-super:调用父类方法，Android中一般是调用onCreate、onDestroy等
+* invoke-direct:调用private method。
+  例如：
+  
+  ```
+  invoke-direct{p0},Landroid/app/TabActivity;-><init>()V
+  ```
+  即调用实例的private init()。
+  
+* invoke-virtual：用于调用protected和public method。
+  例如：
+  
+  ```
+  sget-object v0,Lcom/ddd;->bbb:Lcom/ccc
+  invoke-virtual {v0,v1},Lcom/ccc;->Message(Ljava/lang/Object;)V
+  ```
+  解释：
+  v0 即为bbb:Lcom/ccc
+  v1就是传递给Messages方法的Ljava/lang/Object参数。
+
+*******
 
 ### 基本语法
 * field private isFlag:z  定义变量
