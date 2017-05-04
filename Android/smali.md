@@ -81,6 +81,46 @@ smali中的方法有两类：direct和virtual。direct method就是private metho
   v0 即为bbb:Lcom/ccc
   v1就是传递给Messages方法的Ljava/lang/Object参数。
 
+* invoke-xxxx/range：当方法的参数多于5个（包括5个）时，调用方法时在后面加上“/range”，range表示范围。
+  例如：
+  
+  ```
+  invoke-direct/range{v0...v5},Lcmb/pb/ui/PBContainerActivity;->h(ILjava/lang/CharSequence;Ljava/lang/String;Landroid/content/Intent;I)Z
+  ```
+  解释：
+  需要传递v0到v5，总计6个参数，此时大括号内的参数采用省略形式，且需连续。
+  
+* move-result和move-result-object，分别用于返回基本数据类型和对象。在java中，调用函数和获取返回值用一条语句就可以完成，但在smali中，则需要分开操作来完成。
+	例如：
+
+	```
+	const-string v0,"feng"
+	invoke-static {v0},Lcmb.pbi;->t(Ljava/lang/string;)Ljava/lang/String;
+	move-result-object v2
+	```
+	解释：
+	v2寄存器中保存了调用t方法的返回值，类型是Ljava/langString。
+
+### 方法实例
+例如：
+
+```
+.method private isRegistered()Z
+	.local 2
+	.prologue
+	const/4 v0,0x1
+	.local v0,tempFlag:Z
+	if-eqz v0, :cond_0
+	const/4 v1,0x1
+	:goto_0
+	return v1
+	:cond_0
+	const/4 v1,0x0
+	goto :goto_0
+.end method
+```
+
+
 *******
 
 ### 基本语法
@@ -205,8 +245,6 @@ iput v1,v0,Landroid/os/Message;->what:I
 * .class public Lcom/aaaa;    //com.aaaa这个package下的一个类  
 * .super Lcom/bbbb;   //这个类继承自com.bbbb这个类
 * .source "cccc.java"  //这个smali文件由cccc.java源文件编译得到
-
-## 
 
 
 
