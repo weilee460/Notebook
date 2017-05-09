@@ -134,6 +134,22 @@ private Boolean isRegistered()
 }
 ```
 
+例子2:
+
+```
+.const/4 v0,0x0
+.local v0,i:I
+:goto_0
+if-lt v0,v3, :cond_0
+return-void
+:cond_0
+iget-object v1,p0,Lcom/aaa/MainActivity;->listStrings:Ljava/util/List;
+const-string v2,"Eric"
+invoke-interface {v1,v2},Ljava/util/List;->add(Ljava/lang/Object;)Z
+add-int/lit8 v0,v0,0x1
+goto :goto_0
+```
+
 
 *******
 
