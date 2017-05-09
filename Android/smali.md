@@ -120,6 +120,20 @@ smali中的方法有两类：direct和virtual。direct method就是private metho
 .end method
 ```
 
+即：
+
+```
+private Boolean isRegistered()
+{
+	Boolean tempFlag = true;
+	if (tempFlag==false)
+	{
+		return false;
+	}
+	return true;
+}
+```
+
 
 *******
 
