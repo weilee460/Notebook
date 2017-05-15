@@ -119,15 +119,16 @@
 	emulator
 	```
 
-
-
 ## 错误排查
 
 
 ## 参考
-1、[Android_Goole](https://source.android.com/source/initializing)
+1. [Android_Goole](https://source.android.com/source/initializing)
 
-2、[清华大学镜像站点](https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/#section-1)
+2. [清华大学镜像站点](https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/#section-1)
 
-3、 []()
+3. [macOS（Sierra 10.12）上Android源码（AOSP）的下载、编译与导入到Android Studio
+](http://blog.bihe0832.com/macOS-AOSP.html?utm_source=tuicool&utm_medium=referral)
+
+4. [解决macOSX10.12.SDK下编译Android Open Source Project出错的问题](http://palanceli.com/2016/09/25/2016/0925AOSPOnMac/)
 
