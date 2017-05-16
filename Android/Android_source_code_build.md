@@ -119,8 +119,6 @@
 	emulator
 	```
 
-## 错误排查
-
 
 ## 参考
 1. [Android_Goole](https://source.android.com/source/initializing)
