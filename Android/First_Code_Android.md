@@ -31,3 +31,46 @@ Intent使用分为两种：显式Intent和隐式Intent。简单的来说，显�
 4. SingleInstance: 
 
 
+
+
+
+### Activity最佳实践
+
+#### 知道当前所在的Activity
+
+
+#### 随时退出应用
+
+
+#### 启动Activity最佳写法
+
+
+
+## 常见控件
+
+
+
+## 常见布局
+
+
+## Fragment
+
+
+## Broadcast
+
+
+
+## 持久化
+
+
+
+## Content Provider
+
+
+## Multimedia
+
+
+## Network
+
+
+## Service
