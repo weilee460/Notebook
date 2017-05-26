@@ -7,5 +7,5 @@
 
 ## bash切换zsh
 ```
- chsh -s /bin/bash
+ chsh -s /bin/zsh
 ```
