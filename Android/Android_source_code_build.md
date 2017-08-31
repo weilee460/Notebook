@@ -31,7 +31,9 @@
 	ulimit -S -n 1024
 	```
 	
-6. 下载sdk:[MacOSX SDK](https://github.com/phracker/MacOSX-SDKs).拷贝到```/Applications/XCode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs```
+6. 下载sdk:[MacOSX SDK](https://github.com/phracker/MacOSX-SDKs).
+拷贝到
+```/Applications/XCode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs```
 
 ## 下载源码
 

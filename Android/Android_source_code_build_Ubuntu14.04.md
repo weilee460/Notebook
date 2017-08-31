@@ -1,0 +1,1 @@
+# Android source code build in Ubuntu14.04
