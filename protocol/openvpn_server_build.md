@@ -1,13 +1,13 @@
-#openVPN服务器搭建
+# openVPN服务器搭建
 
-##环境配置
+## 环境配置
 Client：Windows 10
 Server: Ubuntu 14.04
 
-##配置方式
+## 配置方式
 openVPN static key方式
 
-##搭建过程
+## 搭建过程
 1、server端安装openvpn：```sudo apt-get install openvpn```;   
 2、Client端安装openvpn; 
 3、生成static.key：
@@ -34,9 +34,9 @@ secret static.key
 
 	1、 xxxxxx---server的IP或者域名。
 
-##配置说明
+## 配置说明
 secret
-##参考
+## 参考
 1、[openvpn Windows client下载地址](https://swupdate.openvpn.org/community/releases/openvpn-install-2.4.4-I601.exe)
 
 2、[openvpn mini配置](https://openvpn.net/index.php/open-source/documentation/miscellaneous/78-static-key-mini-howto.html)
