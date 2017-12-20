@@ -10,20 +10,20 @@ openVPN static key方式
 
 ## 搭建过程
 1、server端安装openvpn：```sudo apt-get install openvpn```;   
-2、Client端安装openvpn; 
+2、Client端安装openvpn;   
 3、生成static.key：
 
 ```
 openvpn --genkey --secret static.key
 ``` 
-3、Server配置如下：
+4、Server配置如下：
 
 ```
 dev tun
 ifconfig 10.8.0.1 10.8.0.2
 secret static.key
 ```
-4、Client配置如下：
+5、Client配置如下：
 
 ```
 remote xxxxx
