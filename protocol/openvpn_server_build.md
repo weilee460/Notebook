@@ -2,6 +2,7 @@
 
 ## 环境配置
 Client：Windows 10
+
 Server: Ubuntu 14.04
 
 ## 配置方式
