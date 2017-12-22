@@ -18,6 +18,8 @@
 
 **ifconfig**
 
+设置eth1网口的MTU为2000: ```ifconfig eth1 mtu 2000```
+
 #### 截图
 
 ![ifconfig](img/ifconfig.png)
