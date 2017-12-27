@@ -89,6 +89,7 @@ set_var EASYRSA_REQ_OU	"My Organizational Unit"  #设置机构单位或部门名
 ./easyrsa build-ca   #创建根证书
 ```
 创建根证书的输出如下：
+
 ![build-ca](img/build-ca_filter.png)
 
 需要茹茹两次密码和证书名称，请记住密码和名称。
@@ -99,7 +100,23 @@ set_var EASYRSA_REQ_OU	"My Organizational Unit"  #设置机构单位或部门名
 ./easyrsa gen-req server nopass
 ```
 其输出为：
+
 ![gen-req server](img/gen-req_server.png)
+
+6、签名服务器证书：
+
+```
+./easyrsa sign server server
+```
+在输入创建CA时的密码后，其输出为：
+
+![sign server](img/sign-server.png)
+
+7、创建大名鼎鼎的DH（了解IPSec的都知道）：
+
+```
+./easyrsa gen-dh
+```
 
 
 
