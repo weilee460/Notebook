@@ -92,7 +92,7 @@ set_var EASYRSA_REQ_OU	"My Organizational Unit"  #设置机构单位或部门名
 
 ![build-ca](img/build-ca_filter.png)
 
-需要茹茹两次密码和证书名称，请记住密码和名称。
+需要输入两次密码和证书名称，请记住密码和名称。
 
 5、创建服务端证书：
 
@@ -117,6 +117,28 @@ set_var EASYRSA_REQ_OU	"My Organizational Unit"  #设置机构单位或部门名
 ```
 ./easyrsa gen-dh
 ```
+长度越长，花费的时间越长。
+
+**************
+
+**以下步骤为：创建客户端证书**
+
+8、拷贝前面下载的Easy-RSA3文件，解压得到新的Easy-RSA目录，不要和上述创建服务器端的证书等一个目录。
+
+9、进入到刚才解压得到的Easy-RSA目录。执行初始化：
+
+```
+./easyrsa init-pki
+```
+
+10、创建客户端key，并生成证书。
+
+```
+./easyrsa gen-req vpnclient
+```
+输入密码和名称后，其输出如下：
+![gen-req vpnclient](img/gen_req_client.png)
+
 
 
 
