@@ -26,3 +26,5 @@
 2. [homebrew cask](https://caskroom.github.io)
 
 3. [sshfs](https://github.com/osxfuse/osxfuse/wiki/SSHFS)
+
+4. [sshfs_github](https://github.com/libfuse/sshfs)
